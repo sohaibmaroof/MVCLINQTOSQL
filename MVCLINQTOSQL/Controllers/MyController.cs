@@ -1,28 +1,27 @@
-﻿using AutoMapper;
-using MVCLINQTOSQL.Models;
-using System;
+﻿
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using Tombola.Core.Data.Repository;
-using Tombola.Core.Data.DB;
+
 
 namespace MVCLINQTOSQL.Controllers
 {
-
     public class MyController : Controller
     {
-        //
+        #region Display...
+        /// <summary>
+        /// Get Action for index
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
-            var userRepositroy = new UserRepository();
-            var userList = userRepositroy.GetAll();
-            var users = new List<Models.User>();
+            var dbContext = new MyDBDataContext();
+            var userList = from user in dbContext.Users select user;
+            var users = new List<MVCLINQTOSQL.Models.User>();
             if (userList.Any())
             {
                 foreach (var user in userList)
-                    users.Add(new Models.User()
+                    users.Add(new MVCLINQTOSQL.Models.User()
                     {
                         Id = user.Id,
                         Address = user.Address,
@@ -43,40 +42,66 @@ namespace MVCLINQTOSQL.Controllers
             return View(users);
         }
 
-       public ActionResult Details(int id)
+        /// <summary>
+        /// Get Action for Details
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult Details(int? id)
         {
-            var userRepositroy = new UserRepository();
-            var userDetails = userRepositroy.GetById(id);
-            Mapper.CreateMap<Tombola.Core.Data.DB.User, Models.User>();
-            var converted = Mapper.Map<Models.User>(userDetails);
-            //var user = new Models.User();
-            //user.Id = userDetails.Id;
-            //    user.FirstName = userDetails.FirstName;
-            //    user.LastName = userDetails.LastName;
-            //    user.Address = userDetails.Address;
-            //    user.PhoneNo = userDetails.PhoneNo;
-            //    user.EMail = userDetails.EMail;
-            //    user.Company = userDetails.Company;
-            //    user.Designation = userDetails.Designation;
-            return View(converted);
+            var dbContext = new MyDBDataContext();
+            var userDetails = dbContext.Users.FirstOrDefault(userId => userId.Id == id);
+            var user = new MVCLINQTOSQL.Models.User();
+            if (userDetails != null)
+            {
+                user.Id = userDetails.Id;
+                user.FirstName = userDetails.FirstName;
+                user.LastName = userDetails.LastName;
+                user.Address = userDetails.Address;
+                user.PhoneNo = userDetails.PhoneNo;
+                user.EMail = userDetails.EMail;
+                user.Company = userDetails.Company;
+                user.Designation = userDetails.Designation;
+            }
+            return View(user);
         }
-        
+        #endregion
+
+        #region Create...
+        /// <summary>
+        /// Get Action for Create
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Create()
         {
             return View();
         }
 
+        /// <summary>
+        /// Post Action for Create
+        /// </summary>
+        /// <param name="userDetails"> </param>
+        /// <returns></returns>
         [HttpPost]
-        public ActionResult Create(Models.User userDetails)
+        public ActionResult Create(MVCLINQTOSQL.Models.User userDetails)
         {
             try
             {
-                var userRepositroy = new UserRepository();
-                var user = new Tombola.Core.Data.DB.User();
-                Mapper.CreateMap<Models.User, Tombola.Core.Data.DB.User>();
-                var converted = Mapper.Map<Tombola.Core.Data.DB.User>(user);
-                userRepositroy.Add(converted);
-                userRepositroy.SubmitChanges();
+                var dbContext = new MyDBDataContext();
+                var user = new User();
+                if (userDetails != null)
+                {
+                    user.Id = userDetails.Id;
+                    user.FirstName = userDetails.FirstName;
+                    user.LastName = userDetails.LastName;
+                    user.Address = userDetails.Address;
+                    user.PhoneNo = userDetails.PhoneNo;
+                    user.EMail = userDetails.EMail;
+                    user.Company = userDetails.Company;
+                    user.Designation = userDetails.Designation;
+                }
+                dbContext.Users.InsertOnSubmit(user);
+                dbContext.SubmitChanges();
                 return RedirectToAction("Index");
             }
             catch
@@ -84,40 +109,59 @@ namespace MVCLINQTOSQL.Controllers
                 return View();
             }
         }
-        
-        public ActionResult Edit(int id)
+        #endregion
+
+        #region Edit...
+        /// <summary>
+        /// Get Action for Edit
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult Edit(int? id)
         {
-            var userRepositroy = new UserRepository();
-            var userDetails = userRepositroy.GetById(id);
-            var user = new Models.User();
-            Mapper.CreateMap<Tombola.Core.Data.DB.User, Models.User>();
-            var converted = Mapper.Map<Models.User>(userDetails);
-            return View(converted);
+            var dbContext = new MyDBDataContext();
+            var userDetails = dbContext.Users.FirstOrDefault(userId => userId.Id == id);
+            var user = new MVCLINQTOSQL.Models.User();
+            if (userDetails != null)
+            {
+                user.Id = userDetails.Id;
+                user.FirstName = userDetails.FirstName;
+                user.LastName = userDetails.LastName;
+                user.Address = userDetails.Address;
+                user.PhoneNo = userDetails.PhoneNo;
+                user.EMail = userDetails.EMail;
+                user.Company = userDetails.Company;
+                user.Designation = userDetails.Designation;
+            }
+            return View(user);
         }
 
+        /// <summary>
+        /// Post Action for Edit
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="user"></param>
+        /// <returns></returns>
         [HttpPost]
-        public ActionResult Edit(int id, Tombola.Core.Data.DB.User from)
+        public ActionResult Edit(int? id, User userDetails)
         {
             TempData["TempData Name"] = "Akhil";
 
             try
             {
-                var userRepositroy = new UserRepository();
-                Tombola.Core.Data.DB.User into = userRepositroy.GetById(id);
-               //Mapper.CreateMap<Models.User, Tombola.Core.Data.DB.User>();
-                AutoMapper.Mapper.Map(from, into);
-              //Tombola.Core.Data.DB.User converted = Mapper.Map<Tombola.Core.Data.DB.User>(from);
-                into.FirstName = from.FirstName;
-              //  into.FirstName = converted.FirstName;
-               //into.FirstName = converted.FirstName;
-               //into.LastName = converted.LastName;
-               //into.Address = converted.Address;
-               //into.PhoneNo = converted.PhoneNo;
-               //into.EMail = converted.EMail;
-               //into.Company = converted.Company;
-               //into.Designation = converted.Designation;
-               // Mapper.Map(from, into);
-                userRepositroy.SubmitChanges();
+                var dbContext = new MyDBDataContext();
+                var user = dbContext.Users.FirstOrDefault(userId => userId.Id == id);
+                if (user != null)
+                {
+                    user.FirstName = userDetails.FirstName;
+                    user.LastName = userDetails.LastName;
+                    user.Address = userDetails.Address;
+                    user.PhoneNo = userDetails.PhoneNo;
+                    user.EMail = userDetails.EMail;
+                    user.Company = userDetails.Company;
+                    user.Designation = userDetails.Designation;
+                    dbContext.SubmitChanges();
+                }
                 return RedirectToAction("Index");
             }
             catch
@@ -125,33 +169,51 @@ namespace MVCLINQTOSQL.Controllers
                 return View();
             }
         }
-        
-        public ActionResult Delete(int id)
-        {
-            var userRepositroy = new UserRepository();
-            var userDetails = userRepositroy.GetById(id);
-            var user = new Models.User();
-            Mapper.CreateMap<Tombola.Core.Data.DB.User, Models.User>();
-            var converted = Mapper.Map<Models.User>(userDetails);
-            //user.FirstName = userDetails.FirstName;
-            //user.LastName = userDetails.LastName;
-            //user.Address = userDetails.Address;
-            //user.PhoneNo = userDetails.PhoneNo;
-            //user.EMail = userDetails.EMail;
-            //user.Company = userDetails.Company;
-            //user.Designation = userDetails.Designation;
+        #endregion
 
-            return View(converted);
+        #region Delete...
+        /// <summary>
+        /// Get Action for Delete
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult Delete(int? id)
+        {
+            var dbContext = new MyDBDataContext();
+            var user = new MVCLINQTOSQL.Models.User();
+            var userDetails = dbContext.Users.FirstOrDefault(userId => userId.Id == id);
+            if (userDetails != null)
+            {
+                user.FirstName = userDetails.FirstName;
+                user.LastName = userDetails.LastName;
+                user.Address = userDetails.Address;
+                user.PhoneNo = userDetails.PhoneNo;
+                user.EMail = userDetails.EMail;
+                user.Company = userDetails.Company;
+                user.Designation = userDetails.Designation;
+            }
+            return View(user);
         }
-        
+
+        /// <summary>
+        /// Post Action for Delete
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="userDetails"> </param>
+        /// <returns></returns>
         [HttpPost]
-        public ActionResult Delete(int id, Models.User userDetails)
+        public ActionResult Delete(int? id, MVCLINQTOSQL.Models.User userDetails)
         {
             try
             {
-                var userRepositroy = new UserRepository();
-                userRepositroy.DeleteById(id);
-                userRepositroy.SubmitChanges();
+                var dbContext = new MyDBDataContext();
+                var user = dbContext.Users.FirstOrDefault(userId => userId.Id == id);
+                if (user != null)
+                {
+                    dbContext.Users.DeleteOnSubmit(user);
+                    dbContext.SubmitChanges();
+                }
+
                 return RedirectToAction("Index");
             }
             catch
@@ -159,6 +221,6 @@ namespace MVCLINQTOSQL.Controllers
                 return View();
             }
         }
-        
+        #endregion
     }
 }
