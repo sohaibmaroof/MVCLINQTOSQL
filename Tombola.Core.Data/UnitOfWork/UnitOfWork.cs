@@ -10,20 +10,20 @@ namespace Tombola.Core.Data.UnitOfWork
 {
     public class UnitOfWork
     {
-        public  MVCDataContext context=new MVCDataContext();
+        public MVCDataContext context = new MVCDataContext();
         public BaseRepository<User> useRepository;
         private bool disposed = false;
         public BaseRepository<User> UseRepository
         {
             get
             {
-                if (this.useRepository==null)
+                if (this.useRepository == null)
                 {
-                    this.useRepository=new BaseRepository<User>(context);
+                    this.useRepository = new BaseRepository<User>(context);
                 }
                 return useRepository;
             }
-            
+
         }
 
         public void SubmitChanges()

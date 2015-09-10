@@ -28,6 +28,7 @@ namespace Tombola.Core.Data.UnitTest
                 Console.WriteLine(baz);
             }
         }
+
         [TestMethod]
         public void GetById()
         {

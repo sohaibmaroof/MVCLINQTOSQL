@@ -11,13 +11,11 @@ using Tombola.Core.Data.DB.Interfaces;
 
 namespace Tombola.Core.Data.Repository
 {
-    public class BaseRepository<EntityType>:IDisposable
-        where EntityType : class,ITombolaEntity 
-       
+    public class BaseRepository<EntityType> : IDisposable
+    where EntityType : class,ITombolaEntity
     {
         internal MVCDataContext Context;
-
-
+        
         public BaseRepository(MVCDataContext context)
         {
             Context = context;
@@ -35,7 +33,7 @@ namespace Tombola.Core.Data.Repository
 
         protected Table<EntityType> GetTable()
         {
-            return Context.GetTable<EntityType>();     
+            return Context.GetTable<EntityType>();
         }
 
         public void Delete(EntityType repositoryTypoeClass)
@@ -47,7 +45,7 @@ namespace Tombola.Core.Data.Repository
         {
             Delete(GetById(id));
         }
-       
+
         public void Add(EntityType item)
         {
             GetTable().InsertOnSubmit(item);
@@ -55,7 +53,7 @@ namespace Tombola.Core.Data.Repository
 
         public void SubmitChanges()
         {
-           Context.SubmitChanges();
+            Context.SubmitChanges();
         }
 
         public void Dispose()
@@ -63,6 +61,6 @@ namespace Tombola.Core.Data.Repository
             Context.Dispose();
         }
 
-       
+
     }
 }
