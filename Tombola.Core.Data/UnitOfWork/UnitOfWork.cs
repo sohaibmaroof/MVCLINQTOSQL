@@ -8,7 +8,7 @@ using Tombola.Core.Data.Repository;
 
 namespace Tombola.Core.Data.UnitOfWork
 {
-    public class UnitOfWork
+    public class UnitOfWork:IDisposable
     {
         public MVCDataContext context = new MVCDataContext();
         public BaseRepository<User> useRepository;
