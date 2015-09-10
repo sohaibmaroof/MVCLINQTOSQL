@@ -7,12 +7,9 @@ using Tombola.Core.Data.DB;
 
 namespace Tombola.Core.Data.Repository
 {
-    public class UserRepository : BaseRepository<User, MVCDataContext>
+    public class UserRepository : BaseRepository<User>
     {
-        public UserRepository():base()
-        {
-            
-        }
+        
         public UserRepository(MVCDataContext context)
             : base(context)
         {

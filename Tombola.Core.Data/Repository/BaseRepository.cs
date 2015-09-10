@@ -5,21 +5,20 @@ using System.Linq;
 using System.Net.Configuration;
 using System.Text;
 using System.Threading.Tasks;
+using Tombola.Core.Data.DB;
 using Tombola.Core.Data.DB.Interfaces;
 
 
 namespace Tombola.Core.Data.Repository
 {
-    public class BaseRepository<EntityType,DBContextType>:IDisposable
+    public class BaseRepository<EntityType>:IDisposable
         where EntityType : class,ITombolaEntity 
-        where DBContextType:DataContext, new()
+       
     {
-        public BaseRepository():this(new DBContextType())
-        {
-            
-        }
- 
-        public BaseRepository(DBContextType context)
+        internal MVCDataContext Context;
+
+
+        public BaseRepository(MVCDataContext context)
         {
             Context = context;
         }
@@ -64,6 +63,6 @@ namespace Tombola.Core.Data.Repository
             Context.Dispose();
         }
 
-        public DBContextType Context { get; set; }
+       
     }
 }
