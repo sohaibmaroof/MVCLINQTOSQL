@@ -1,12 +1,7 @@
-﻿using AutoMapper;
-using MVCLINQTOSQL.Models;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Tombola.Core.Data.Repository;
-using Tombola.Core.Data.DB;
 using MVCLINQTOSQL.Mapping;
 namespace MVCLINQTOSQL.Controllers
 {
@@ -19,20 +14,11 @@ namespace MVCLINQTOSQL.Controllers
             var userRepositroy = new UserRepository();
             var userList = userRepositroy.GetAll();
             var users = new List<Models.User>();
+            MapUser.RegisterMappings();
             if (userList.Any())
             {
                 foreach (var user in userList)
-                    users.Add(new Models.User()
-                    {
-                        Id = user.Id,
-                        Address = user.Address,
-                        Company = user.Company,
-                        FirstName = user.FirstName,
-                        LastName = user.LastName,
-                        Designation = user.Designation,
-                        EMail = user.EMail,
-                        PhoneNo = user.PhoneNo
-                    });
+                    users.Add(MapUser.ToModel(user));
             }
             ViewBag.FirstName = "My First Name";
             ViewData["FirstName"] = "My First Name";
@@ -114,7 +100,7 @@ namespace MVCLINQTOSQL.Controllers
             var userRepositroy = new UserRepository();
             var userDetails = userRepositroy.GetById(id);
             MapUser.RegisterMappings();
-            var converted= MapUser.ToModel(userDetails);
+            var converted = MapUser.ToModel(userDetails);
             return View(converted);
         }
 
