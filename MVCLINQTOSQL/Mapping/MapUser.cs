@@ -18,7 +18,7 @@ namespace MVCLINQTOSQL.Mapping
         {
             return AutoMapper.Mapper.Map<Database.User>(from);
         }
-        public static void RegisterOneToOneMap<TypeFrom, TypeTo>()
+        public static void RegisterOneToOneMap<TypeFrom,TypeTo>()
         {
             AutoMapper.Mapper.CreateMap<TypeFrom, TypeTo>();
             AutoMapper.Mapper.CreateMap<TypeTo, TypeFrom>();
