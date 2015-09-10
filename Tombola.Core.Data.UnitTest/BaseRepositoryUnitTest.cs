@@ -72,7 +72,17 @@ namespace Tombola.Core.Data.UnitTest
             Database.User user = new UserRepository().GetById(1);
             AutoMapper.Mapper.CreateMap<Model.User, Database.User>();
             Model.User converted = AutoMapper.Mapper.Map<Model.User>(user);
-            Console.WriteLine(user.Address);
+            Console.WriteLine(converted);
+        }
+        [TestMethod]
+        public void CustomMapping()
+        {
+            Database.User user = new UserRepository().GetById(1);
+            MVCLINQTOSQL.Mapping.MapUser.RegisterMappings();
+           // AutoMapper.Mapper.CreateMap<Model.User, Database.User>();
+            Model.User converted =MVCLINQTOSQL.Mapping.MapUser.ToModel(user);
+           // Model.User converted = AutoMapper.Mapper.Map<Model.User>(user);
+            Console.WriteLine(converted);
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using Tombola.Core.Data.Repository;
 using Tombola.Core.Data.DB;
-
+using MVCLINQTOSQL.Mapping;
 namespace MVCLINQTOSQL.Controllers
 {
 
@@ -47,8 +47,8 @@ namespace MVCLINQTOSQL.Controllers
         {
             var userRepositroy = new UserRepository();
             var userDetails = userRepositroy.GetById(id);
-            Mapper.CreateMap<Tombola.Core.Data.DB.User, Models.User>();
-            var converted = Mapper.Map<Models.User>(userDetails);
+            MapUser.RegisterMappings();
+            var converted = MapUser.ToModel(userDetails);
             return View(converted);
         }
 
@@ -63,9 +63,8 @@ namespace MVCLINQTOSQL.Controllers
             try
             {
                 var userRepositroy = new UserRepository();
-                var user = new Tombola.Core.Data.DB.User();
-                Mapper.CreateMap<Models.User, Tombola.Core.Data.DB.User>();
-                var converted = Mapper.Map<Tombola.Core.Data.DB.User>(user);
+                MapUser.RegisterMappings();
+                var converted = MapUser.ToDataBase(userDetails);
                 userRepositroy.Add(converted);
                 userRepositroy.SubmitChanges();
                 return RedirectToAction("Index");
@@ -81,8 +80,8 @@ namespace MVCLINQTOSQL.Controllers
             var userRepositroy = new UserRepository();
             var userDetails = userRepositroy.GetById(id);
             var user = new Models.User();
-            Mapper.CreateMap<Tombola.Core.Data.DB.User, Models.User>();
-            var converted = Mapper.Map<Models.User>(userDetails);
+            MapUser.RegisterMappings();
+            var converted = MapUser.ToModel(userDetails);
             return View(converted);
         }
 
@@ -114,9 +113,8 @@ namespace MVCLINQTOSQL.Controllers
         {
             var userRepositroy = new UserRepository();
             var userDetails = userRepositroy.GetById(id);
-            var user = new Models.User();
-            Mapper.CreateMap<Tombola.Core.Data.DB.User, Models.User>();
-            var converted = Mapper.Map<Models.User>(userDetails);
+            MapUser.RegisterMappings();
+            var converted= MapUser.ToModel(userDetails);
             return View(converted);
         }
 
