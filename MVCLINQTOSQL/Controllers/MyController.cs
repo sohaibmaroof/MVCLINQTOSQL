@@ -49,15 +49,6 @@ namespace MVCLINQTOSQL.Controllers
             var userDetails = userRepositroy.GetById(id);
             Mapper.CreateMap<Tombola.Core.Data.DB.User, Models.User>();
             var converted = Mapper.Map<Models.User>(userDetails);
-            //var user = new Models.User();
-            //user.Id = userDetails.Id;
-            //    user.FirstName = userDetails.FirstName;
-            //    user.LastName = userDetails.LastName;
-            //    user.Address = userDetails.Address;
-            //    user.PhoneNo = userDetails.PhoneNo;
-            //    user.EMail = userDetails.EMail;
-            //    user.Company = userDetails.Company;
-            //    user.Designation = userDetails.Designation;
             return View(converted);
         }
 
@@ -126,14 +117,6 @@ namespace MVCLINQTOSQL.Controllers
             var user = new Models.User();
             Mapper.CreateMap<Tombola.Core.Data.DB.User, Models.User>();
             var converted = Mapper.Map<Models.User>(userDetails);
-            //user.FirstName = userDetails.FirstName;
-            //user.LastName = userDetails.LastName;
-            //user.Address = userDetails.Address;
-            //user.PhoneNo = userDetails.PhoneNo;
-            //user.EMail = userDetails.EMail;
-            //user.Company = userDetails.Company;
-            //user.Designation = userDetails.Designation;
-
             return View(converted);
         }
 
