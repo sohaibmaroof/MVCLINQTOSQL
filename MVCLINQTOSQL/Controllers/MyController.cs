@@ -3,39 +3,33 @@ using System.Linq;
 using System.Web.Mvc;
 using Tombola.Core.Data.Repository;
 using MVCLINQTOSQL.Mapping;
+using Database = Tombola.Core.Data.DB;
 namespace MVCLINQTOSQL.Controllers
 {
 
     public class MyController : Controller
     {
-
+        private readonly UserRepository _userRepository;
+        
+        public MyController()
+        {
+            this._userRepository=new UserRepository(new Database.MVCDataContext());
+            MapUser.RegisterMappings();
+        }
         public ActionResult Index()
         {
-            var userRepositroy = new UserRepository();
-            var userList = userRepositroy.GetAll();
+            var userList = _userRepository.GetAll();
             var users = new List<Models.User>();
             MapUser.RegisterMappings();
-            if (userList.Any())
-            {
-                foreach (var user in userList)
-                    users.Add(MapUser.ToModel(user));
-            }
-            ViewBag.FirstName = "My First Name";
-            ViewData["FirstName"] = "My First Name";
-            if (TempData.Any())
-            {
-                var tempData = TempData["TempData Name"];
-            }
+            if (!userList.Any()) return View(users);
+            foreach (var user in userList)
+                users.Add(MapUser.ToModel(user));
             return View(users);
         }
 
         public ActionResult Details(int id)
         {
-            var userRepositroy = new UserRepository();
-            var userDetails = userRepositroy.GetById(id);
-            MapUser.RegisterMappings();
-            var converted = MapUser.ToModel(userDetails);
-            return View(converted);
+          return View(MapUser.ToModel(_userRepository.GetById(id)));
         }
 
         public ActionResult Create()
@@ -48,11 +42,8 @@ namespace MVCLINQTOSQL.Controllers
         {
             try
             {
-                var userRepositroy = new UserRepository();
-                MapUser.RegisterMappings();
-                var converted = MapUser.ToDataBase(userDetails);
-                userRepositroy.Add(converted);
-                userRepositroy.SubmitChanges();
+               _userRepository.Add(MapUser.ToDataBase(userDetails));
+                _userRepository.SubmitChanges();
                 return RedirectToAction("Index");
             }
             catch
@@ -63,22 +54,16 @@ namespace MVCLINQTOSQL.Controllers
 
         public ActionResult Edit(int id)
         {
-            var userRepositroy = new UserRepository();
-            var userDetails = userRepositroy.GetById(id);
-            var user = new Models.User();
-            MapUser.RegisterMappings();
-            var converted = MapUser.ToModel(userDetails);
-            return View(converted);
+            return View(MapUser.ToModel(_userRepository.GetById(id)));
         }
 
         [HttpPost]
-        public ActionResult Edit(int id, Tombola.Core.Data.DB.User from)
+        public ActionResult Edit(int id, Database.User from)
         {
             TempData["TempData Name"] = "Akhil";
             try
             {
-                var userRepositroy = new UserRepository();
-                Tombola.Core.Data.DB.User into = userRepositroy.GetById(id);
+                Database.User into = _userRepository.GetById(id);
                 into.FirstName = from.FirstName;
                 into.LastName = from.LastName;
                 into.Address = from.Address;
@@ -86,7 +71,7 @@ namespace MVCLINQTOSQL.Controllers
                 into.EMail = from.EMail;
                 into.Company = from.Company;
                 into.Designation = from.Designation;
-                userRepositroy.SubmitChanges();
+                _userRepository.SubmitChanges();
                 return RedirectToAction("Index");
             }
             catch
@@ -97,11 +82,7 @@ namespace MVCLINQTOSQL.Controllers
 
         public ActionResult Delete(int id)
         {
-            var userRepositroy = new UserRepository();
-            var userDetails = userRepositroy.GetById(id);
-            MapUser.RegisterMappings();
-            var converted = MapUser.ToModel(userDetails);
-            return View(converted);
+            return View(MapUser.ToModel(_userRepository.GetById(id)));
         }
 
         [HttpPost]
@@ -109,9 +90,8 @@ namespace MVCLINQTOSQL.Controllers
         {
             try
             {
-                var userRepositroy = new UserRepository();
-                userRepositroy.DeleteById(id);
-                userRepositroy.SubmitChanges();
+                _userRepository.DeleteById(id);
+                _userRepository.SubmitChanges();
                 return RedirectToAction("Index");
             }
             catch
