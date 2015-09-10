@@ -13,7 +13,7 @@ namespace MVCLINQTOSQL.Controllers
 
     public class MyController : Controller
     {
-        
+        //
         public ActionResult Index()
         {
             var userRepositroy = new UserRepository();
