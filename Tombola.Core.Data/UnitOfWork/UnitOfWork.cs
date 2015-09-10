@@ -10,9 +10,7 @@ namespace Tombola.Core.Data.UnitOfWork
 {
     public class UnitOfWork:IDisposable
     {
-        public MVCDataContext context = new MVCDataContext();
-        public BaseRepository<User> useRepository;
-        private bool disposed = false;
+        
         public BaseRepository<User> UseRepository
         {
             get
@@ -47,5 +45,9 @@ namespace Tombola.Core.Data.UnitOfWork
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
+        public MVCDataContext context = new MVCDataContext();
+        public BaseRepository<User> useRepository;
+        private bool disposed = false;
     }
 }

@@ -14,8 +14,7 @@ namespace Tombola.Core.Data.Repository
     public class BaseRepository<EntityType> : IDisposable
     where EntityType : class,ITombolaEntity
     {
-        internal MVCDataContext Context;
-        
+       
         public BaseRepository(MVCDataContext context)
         {
             Context = context;
@@ -61,6 +60,6 @@ namespace Tombola.Core.Data.Repository
             Context.Dispose();
         }
 
-
+        internal MVCDataContext Context;
     }
 }

@@ -9,8 +9,7 @@ namespace MVCLINQTOSQL.Controllers
 
     public class MyController : Controller
     {
-        public UnitOfWork unitOfWork=new UnitOfWork();
-
+        
         public MyController()
         {
             MapUser.RegisterMappings();
@@ -100,5 +99,6 @@ namespace MVCLINQTOSQL.Controllers
             }
         }
 
+        public UnitOfWork unitOfWork = new UnitOfWork();
     }
 }
