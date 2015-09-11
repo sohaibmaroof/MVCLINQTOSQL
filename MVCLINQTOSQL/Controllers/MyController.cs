@@ -17,7 +17,7 @@ namespace MVCLINQTOSQL.Controllers
 
         public ActionResult Index()
         {
-            var userList = unitOfWork.UseRepository.GetAll();
+            var userList = _unitOfWork.UseRepository.GetAll();
             var users = new List<Models.User>();
             MapUser.RegisterMappings();
             if (!userList.Any()) return View(users);
@@ -28,7 +28,7 @@ namespace MVCLINQTOSQL.Controllers
 
         public ActionResult Details(int id)
         {
-            return View(MapUser.ToModel(unitOfWork.UseRepository.GetById(id)));
+            return View(MapUser.ToModel(_unitOfWork.UseRepository.GetById(id)));
         }
 
         public ActionResult Create()
@@ -41,8 +41,8 @@ namespace MVCLINQTOSQL.Controllers
         {
             try
             {
-                unitOfWork.UseRepository.Add(MapUser.ToDataBase(userDetails));
-                unitOfWork.SubmitChanges();
+                _unitOfWork.UseRepository.Add(MapUser.ToDataBase(userDetails));
+                _unitOfWork.SubmitChanges();
                 return RedirectToAction("Index");
             }
             catch
@@ -53,7 +53,7 @@ namespace MVCLINQTOSQL.Controllers
 
         public ActionResult Edit(int id)
         {
-            return View(MapUser.ToModel(unitOfWork.UseRepository.GetById(id)));
+            return View(MapUser.ToModel(_unitOfWork.UseRepository.GetById(id)));
         }
 
         [HttpPost]
@@ -62,7 +62,7 @@ namespace MVCLINQTOSQL.Controllers
             TempData["TempData Name"] = "Akhil";
             try
             {
-                Database.User into = unitOfWork.UseRepository.GetById(id);
+                Database.User into = _unitOfWork.UseRepository.GetById(id);
                 into.FirstName = from.FirstName;
                 into.LastName = from.LastName;
                 into.Address = from.Address;
@@ -70,7 +70,7 @@ namespace MVCLINQTOSQL.Controllers
                 into.EMail = from.EMail;
                 into.Company = from.Company;
                 into.Designation = from.Designation;
-                unitOfWork.SubmitChanges();
+                _unitOfWork.SubmitChanges();
                 return RedirectToAction("Index");
             }
             catch
@@ -81,7 +81,7 @@ namespace MVCLINQTOSQL.Controllers
 
         public ActionResult Delete(int id)
         {
-            return View(MapUser.ToModel(unitOfWork.UseRepository.GetById(id)));
+            return View(MapUser.ToModel(_unitOfWork.UseRepository.GetById(id)));
         }
 
         [HttpPost]
@@ -89,8 +89,8 @@ namespace MVCLINQTOSQL.Controllers
         {
             try
             {
-                unitOfWork.UseRepository.DeleteById(id);
-                unitOfWork.SubmitChanges();
+                _unitOfWork.UseRepository.DeleteById(id);
+                _unitOfWork.SubmitChanges();
                 return RedirectToAction("Index");
             }
             catch
@@ -99,6 +99,6 @@ namespace MVCLINQTOSQL.Controllers
             }
         }
 
-        public UnitOfWork unitOfWork = new UnitOfWork();
+        private UnitOfWork _unitOfWork = new UnitOfWork();
     }
 }
