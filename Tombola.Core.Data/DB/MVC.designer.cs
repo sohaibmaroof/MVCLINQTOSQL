@@ -22,7 +22,7 @@ namespace Tombola.Core.Data.DB
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="MVC")]
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="MVCLINQTOSQL")]
 	public partial class MVCDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -36,7 +36,7 @@ namespace Tombola.Core.Data.DB
     #endregion
 		
 		public MVCDataContext() : 
-				base(global::Tombola.Core.Data.Properties.Settings.Default.MVCConnectionString, mappingSource)
+				base(global::Tombola.Core.Data.Properties.Settings.Default.MVCLINQTOSQLConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -143,7 +143,7 @@ namespace Tombola.Core.Data.DB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FirstName", DbType="NVarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FirstName", DbType="VarChar(50)")]
 		public string FirstName
 		{
 			get
@@ -163,7 +163,7 @@ namespace Tombola.Core.Data.DB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastName", DbType="NVarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastName", DbType="VarChar(50)")]
 		public string LastName
 		{
 			get
@@ -183,7 +183,7 @@ namespace Tombola.Core.Data.DB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EMail", DbType="NVarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EMail", DbType="VarChar(50)")]
 		public string EMail
 		{
 			get
@@ -203,7 +203,7 @@ namespace Tombola.Core.Data.DB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Address", DbType="NVarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Address", DbType="VarChar(50)")]
 		public string Address
 		{
 			get
@@ -223,7 +223,7 @@ namespace Tombola.Core.Data.DB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhoneNo", DbType="NVarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhoneNo", DbType="VarChar(50)")]
 		public string PhoneNo
 		{
 			get
@@ -243,7 +243,7 @@ namespace Tombola.Core.Data.DB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Company", DbType="NVarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Company", DbType="VarChar(50)")]
 		public string Company
 		{
 			get
@@ -263,7 +263,7 @@ namespace Tombola.Core.Data.DB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Designation", DbType="NVarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Designation", DbType="VarChar(50)")]
 		public string Designation
 		{
 			get
