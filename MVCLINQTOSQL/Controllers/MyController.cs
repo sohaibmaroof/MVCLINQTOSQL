@@ -13,7 +13,7 @@ namespace MVCLINQTOSQL.Controllers
 
     public class MyController : Controller
     {
-        
+
         public ActionResult Index()
         {
             var userRepositroy = new UserRepository();
@@ -43,7 +43,7 @@ namespace MVCLINQTOSQL.Controllers
             return View(users);
         }
 
-       public ActionResult Details(int id)
+        public ActionResult Details(int id)
         {
             var userRepositroy = new UserRepository();
             var userDetails = userRepositroy.GetById(id);
@@ -60,7 +60,7 @@ namespace MVCLINQTOSQL.Controllers
             //    user.Designation = userDetails.Designation;
             return View(converted);
         }
-        
+
         public ActionResult Create()
         {
             return View();
@@ -84,7 +84,7 @@ namespace MVCLINQTOSQL.Controllers
                 return View();
             }
         }
-        
+
         public ActionResult Edit(int id)
         {
             var userRepositroy = new UserRepository();
@@ -104,19 +104,19 @@ namespace MVCLINQTOSQL.Controllers
             {
                 var userRepositroy = new UserRepository();
                 Tombola.Core.Data.DB.User into = userRepositroy.GetById(id);
-               //Mapper.CreateMap<Models.User, Tombola.Core.Data.DB.User>();
+                //Mapper.CreateMap<Models.User, Tombola.Core.Data.DB.User>();
                 AutoMapper.Mapper.Map(from, into);
-              //Tombola.Core.Data.DB.User converted = Mapper.Map<Tombola.Core.Data.DB.User>(from);
+                //Tombola.Core.Data.DB.User converted = Mapper.Map<Tombola.Core.Data.DB.User>(from);
                 into.FirstName = from.FirstName;
-              //  into.FirstName = converted.FirstName;
-               //into.FirstName = converted.FirstName;
-               //into.LastName = converted.LastName;
-               //into.Address = converted.Address;
-               //into.PhoneNo = converted.PhoneNo;
-               //into.EMail = converted.EMail;
-               //into.Company = converted.Company;
-               //into.Designation = converted.Designation;
-               // Mapper.Map(from, into);
+                //  into.FirstName = converted.FirstName;
+                //into.FirstName = converted.FirstName;
+                //into.LastName = converted.LastName;
+                //into.Address = converted.Address;
+                //into.PhoneNo = converted.PhoneNo;
+                //into.EMail = converted.EMail;
+                //into.Company = converted.Company;
+                //into.Designation = converted.Designation;
+                // Mapper.Map(from, into);
                 userRepositroy.SubmitChanges();
                 return RedirectToAction("Index");
             }
@@ -125,7 +125,7 @@ namespace MVCLINQTOSQL.Controllers
                 return View();
             }
         }
-        
+
         public ActionResult Delete(int id)
         {
             var userRepositroy = new UserRepository();
@@ -143,7 +143,7 @@ namespace MVCLINQTOSQL.Controllers
 
             return View(converted);
         }
-        
+
         [HttpPost]
         public ActionResult Delete(int id, Models.User userDetails)
         {
@@ -159,6 +159,6 @@ namespace MVCLINQTOSQL.Controllers
                 return View();
             }
         }
-        
+
     }
 }
