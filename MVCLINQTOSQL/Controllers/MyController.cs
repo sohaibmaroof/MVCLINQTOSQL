@@ -17,8 +17,7 @@ namespace MVCLINQTOSQL.Controllers
             MapUser.RegisterMappings();
             if (userList.Any())
             {
-                foreach (var user in userList)
-                    users.Add(MapUser.ToModel(user));
+                users.AddRange(userList.Select(user => MapUser.ToModel(user)));
             }
             return View(users);
         }
