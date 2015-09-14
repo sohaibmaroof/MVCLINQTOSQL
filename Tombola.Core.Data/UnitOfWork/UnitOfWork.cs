@@ -17,7 +17,7 @@ namespace Tombola.Core.Data.UnitOfWork
             {
                 if (this.useRepository == null)
                 {
-                    this.useRepository = new BaseRepository<User>(context);
+                    this.useRepository = new BaseRepository<User>(Context);
                 }
                 return useRepository;
             }
@@ -26,7 +26,7 @@ namespace Tombola.Core.Data.UnitOfWork
 
         public void SubmitChanges()
         {
-            context.SubmitChanges();
+            Context.SubmitChanges();
         }
         protected virtual void Dispose(bool disposing)
         {
@@ -34,7 +34,7 @@ namespace Tombola.Core.Data.UnitOfWork
             {
                 if (disposing)
                 {
-                    context.Dispose();
+                    Context.Dispose();
                 }
             }
             this.disposed = true;
@@ -46,7 +46,7 @@ namespace Tombola.Core.Data.UnitOfWork
             GC.SuppressFinalize(this);
         }
 
-        public MVCDataContext context = new MVCDataContext();
+        public MVCDataContext Context = new MVCDataContext();
         public BaseRepository<User> useRepository;
         private bool disposed = false;
     }
