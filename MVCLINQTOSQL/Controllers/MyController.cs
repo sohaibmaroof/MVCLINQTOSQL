@@ -20,12 +20,6 @@ namespace MVCLINQTOSQL.Controllers
                 foreach (var user in userList)
                     users.Add(MapUser.ToModel(user));
             }
-            ViewBag.FirstName = "My First Name";
-            ViewData["FirstName"] = "My First Name";
-            if (TempData.Any())
-            {
-                var tempData = TempData["TempData Name"];
-            }
             return View(users);
         }
 
