@@ -151,15 +151,17 @@ namespace MVCLINQTOSQL.Controllers
             {
                 var dbContext = new MyDBDataContext();
                 var user = dbContext.Users.FirstOrDefault(userId => userId.Id == id);
-                if (user == null) return RedirectToAction("Index");
-                user.FirstName = userDetails.FirstName;
-                user.LastName = userDetails.LastName;
-                user.Address = userDetails.Address;
-                user.PhoneNo = userDetails.PhoneNo;
-                user.EMail = userDetails.EMail;
-                user.Company = userDetails.Company;
-                user.Designation = userDetails.Designation;
-                dbContext.SubmitChanges();
+                if (user != null)
+                {
+                    user.FirstName = userDetails.FirstName;
+                    user.LastName = userDetails.LastName;
+                    user.Address = userDetails.Address;
+                    user.PhoneNo = userDetails.PhoneNo;
+                    user.EMail = userDetails.EMail;
+                    user.Company = userDetails.Company;
+                    user.Designation = userDetails.Designation;
+                    dbContext.SubmitChanges();
+                }
                 return RedirectToAction("Index");
             }
             catch
