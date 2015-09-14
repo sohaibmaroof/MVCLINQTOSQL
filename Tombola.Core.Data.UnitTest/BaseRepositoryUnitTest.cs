@@ -22,16 +22,17 @@ namespace Tombola.Core.Data.UnitTest
         [TestMethod]
         public void GetAll()
         {
-            using (var userRepository = new UserRepository())
+            using (var userRepository = new UserRepository(new MVCDataContext()))
             {
                 var baz = userRepository.GetAll();
                 Console.WriteLine(baz);
             }
         }
+
         [TestMethod]
         public void GetById()
         {
-            using (var userRepository = new UserRepository())
+            using (var userRepository = new UserRepository(new MVCDataContext()))
             {
                 var baz = userRepository.GetById(1);
                 Console.WriteLine(baz.FirstName);
@@ -69,7 +70,7 @@ namespace Tombola.Core.Data.UnitTest
         [TestMethod]
         public void Mapper()
         {
-            Database.User user = new UserRepository().GetById(1);
+            Database.User user = new UserRepository(new MVCDataContext()).GetById(1);
             AutoMapper.Mapper.CreateMap<Model.User, Database.User>();
             Model.User converted = AutoMapper.Mapper.Map<Model.User>(user);
             Console.WriteLine(user.Address);
