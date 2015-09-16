@@ -40,8 +40,6 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 13px;
   line-height: 1.428571429;
-  color: #333333;
-  background-color: #ffffff;
   padding-top: 50px;
   padding-bottom: 20px;
   margin: 0;
@@ -58,12 +56,12 @@ body {
   border-top: 1px solid #dddddd;
 }
 .table a:visited {
-  color: #999999;
+  color: #222222;
   font-weight: bold;
   text-decoration: none;
 }
 .table a:link {
-  color: #666;
+  color: #222222;
   font-weight: bold;
   text-decoration: none;
 }
@@ -78,13 +76,13 @@ fieldset {
   border: 0;
 }
 legend {
-  display: block;
+  display: inline-block;
   width: 100%;
   padding: 0;
   margin-bottom: 20px;
   font-size: 21px;
   line-height: inherit;
-  color: #333333;
+  color: #222222;
   border: 0;
   border-bottom: 1px solid #e5e5e5;
 }
