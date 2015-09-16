@@ -24,7 +24,8 @@ namespace MVCLINQTOSQL
                       "~/Scripts/respond.js"));
 
            // bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/bootstrap.css", "~/Content/StyleSheet1.css"));
-           bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/StyleSheet1.css"));
+           // bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/StyleSheet1.css"));
+            bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
 
         }
     }
