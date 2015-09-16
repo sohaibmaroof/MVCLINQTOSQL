@@ -32,15 +32,13 @@
   font-weight: bold;
 }
 .container {
-  padding-right: 15px;
-  padding-left: 15px;
-  width: 1000px;
+  width: 1020px;
   margin-left: auto;
   margin-right: auto;
 }
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1.428571429;
   color: #333333;
   background-color: #ffffff;
@@ -48,41 +46,29 @@ body {
   padding-bottom: 20px;
   margin: 0;
 }
-table {
-  font-size: 12px;
-  text-shadow: 1px 1px 0px #fff;
-  background: #eaebec;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-  -moz-box-shadow: 0 1px 2px #d1d1d1;
-  -webkit-box-shadow: 0 1px 2px #d1d1d1;
+.table thead > tr > td,
+.table tbody > tr > td,
+.table tfoot > tr > td,
+.table thead > tr > th,
+.table tbody > tr > th,
+.table tfoot > tr > th {
+  padding: 8px;
+  line-height: 1.428571429;
+  vertical-align: top;
+  border-top: 1px solid #dddddd;
 }
-table th {
-  padding: 21px 25px 22px 25px;
-}
-table tr {
-  padding-left: 20px;
-}
-table td {
-  border-top: 1px solid #ffffff;
-  border-bottom: 1px solid #e0e0e0;
-  border-left: 1px solid #e0e0e0;
-  background: #fafafa;
-  background: -webkit-gradient(linear, left top, left bottom, from(#fbfbfb), to(#fafafa));
-  background: -moz-linear-gradient(top, #fbfbfb, #fafafa);
-}
-table a:visited {
+.table a:visited {
   color: #999999;
   font-weight: bold;
   text-decoration: none;
 }
-table a:link {
+.table a:link {
   color: #666;
   font-weight: bold;
   text-decoration: none;
 }
-table a:active,
-table a:hover {
+.table a:active,
+.table a:hover {
   color: #bd5a35;
   text-decoration: underline;
 }
