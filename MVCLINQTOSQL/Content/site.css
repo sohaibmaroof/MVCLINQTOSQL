@@ -72,4 +72,55 @@ body {
   color: #bd5a35;
   text-decoration: underline;
 }
+fieldset {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+legend {
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin-bottom: 20px;
+  font-size: 21px;
+  line-height: inherit;
+  color: #333333;
+  border: 0;
+  border-bottom: 1px solid #e5e5e5;
+}
+h2,
+.h2 {
+  font-size: 30px;
+}
+h1,
+h2,
+h3 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 100;
+  line-height: 1.1;
+}
+.editor-label {
+  font-weight: bold;
+}
+.dl-horizontal dt {
+  float: left;
+  width: 160px;
+  overflow: hidden;
+  clear: left;
+  text-align: right;
+  white-space: nowrap;
+  font-weight: bold;
+}
+.dl-horizontal dd {
+  margin-left: 180px;
+}
 /*# sourceMappingURL=site.css.map */
