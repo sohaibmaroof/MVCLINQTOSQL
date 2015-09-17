@@ -179,7 +179,6 @@
     <Content Include="Views\My\Create.cshtml" />
     <Content Include="Views\My\Delete.cshtml" />
     <Content Include="Views\My\Edit.cshtml" />
-    <Content Include="Views\Shared\_Layout1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
