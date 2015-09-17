@@ -1,0 +1,23 @@
+diff a/MVCLINQTOSQL/Content/site.less b/MVCLINQTOSQL/Content/site.less	(rejected hunks)
+@@ -2,15 +2,18 @@
+ @bold-font-weight: bold;
+ @none: none;
+ 
+-.inline-block-display() {
++.inline-block-display()
++{
+     display: inline-block;
+ }
+ 
+-.text-decoration-none() {
++.text-decoration-none()
++{
+     text-decoration: @none;
+ }
+ 
+-.navbar {
++.navbar
++{
+     background-color: @black-color;
+     z-index: 1000;
+     border: 1px solid transparent;
