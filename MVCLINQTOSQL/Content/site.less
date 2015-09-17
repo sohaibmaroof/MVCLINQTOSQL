@@ -51,53 +51,22 @@
 }
 
 .container {
-    width: 1020px;
+    width: 60%;
     margin-left: auto;
     margin-right: auto;
 }
+footer{
+    width:80%;
+}
 
 body {
+  
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 13px;
     line-height: 1.428571429;
     padding-top: 50px;
     padding-bottom: 20px;
     margin: 0;
-}
-
-
-
-.table {
-
-    thead, tbody, tfoot {
-        > tr {
-            > td, > th {
-                padding: 8px;
-                line-height: 1.428571429;
-                vertical-align: top;
-                border-top: 1px solid #dddddd;
-            }
-        }
-    }
-
-    a {
-        &:visited {
-            color: @black-color;
-            font-weight: @bold-font-weight;
-            .text-decoration-none();
-        }
-
-        &:link {
-            color: @black-color;
-            font-weight: @bold-font-weight;
-            .text-decoration-none();
-        }
-
-        &:active, &:hover {
-            color: #bd5a35;
-            text-decoration: underline;
-        }
-    }
 }
 
 fieldset {
@@ -152,70 +121,118 @@ h1, h2, h3, h4, h5, h6 {
         margin-left: 180px;
     }
 }
-            
-	@media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px)  {
 
-		/* Force table to not be like tables anymore */
-		table, thead, tbody, th, td, tr {
-			display: block;
-		}
+table {
 
-		/* Hide table headers (but not display: none;, for accessibility) */
-		thead tr {
-			position: absolute;
-			top: -9999px;
-			left: -9999px;
-		}
+    thead, tbody, tfoot {
+        > tr {
+            > td, > th {
+                padding: 8px;
+line-height: 1.428571429;
+vertical-align: top;
+border-top: 1px solid #dddddd;
+            }
+        }
+    }
 
-		tr { border: 1px solid #ccc; }
+    a {
+        &:visited {
+            color: @black-color;
+            font-weight: @bold-font-weight;
+            .text-decoration-none();
+        }
 
-		td {
-			/* Behave  like a "row" */
-			border: none;
-			border-bottom: 1px solid #eee;
-			position: relative;
-			padding-left: 50%;
-		}
+        &:link {
+            color: @black-color;
+            font-weight: @bold-font-weight;
+            .text-decoration-none();
+        }
 
-		td:before {
-			/* Now like a table header */
-			position: absolute;
-			/* Top/left values mimic padding */
-			top: 6px;
-			left: 6px;
-			width: 45%;
-			padding-right: 10px;
-			white-space: nowrap;
-		}
+        &:active, &:hover {
+            color: #bd5a35;
+            text-decoration: underline;
+        }
+    }
+}
 
-		/*
-		Label the data
-		*/
-		td:nth-of-type(1):before { content: "First Name"; }
-		td:nth-of-type(2):before { content: "Last Name"; }
-		td:nth-of-type(3):before { content: "Job Title"; }
-		td:nth-of-type(4):before { content: "Favorite Color"; }
-		td:nth-of-type(5):before { content: "Wars of Trek?"; }
-		td:nth-of-type(6):before { content: "Porn Name"; }
-		td:nth-of-type(7):before { content: "Date of Birth"; }
-		td:nth-of-type(8):before { content: "Dream Vacation City"; }
-		td:nth-of-type(9):before { content: "GPA"; }
-		td:nth-of-type(10):before { content: "Arbitrary Data"; }
-	}
+@media only screen and (max-width: 760px),(min-device-width: 768px) and (max-device-width: 1024px) {
+       .container {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+    table {
+        display: block;
 
-	/* Smartphones (portrait and landscape) ----------- */
-	@media only screen
-	and (min-device-width : 320px)
-	and (max-device-width : 480px) {
-		body {
-			padding: 0;
-			margin: 0;
-			width: 320px; }
-		}
+        thead, tbody, th, td, tr {
+            display: block;
 
-	/* iPads (portrait and landscape) ----------- */
-	@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-		body {
-			width: 495px;
-		}
-	}
+            > tr {
+                > td, > th {
+                    border: none;
+                    border-bottom: 1px solid #eee;
+                    position: relative;
+                    padding-left: 50%;
+                }
+            }
+        }
+
+        tbody {
+            &:first-child {
+                th {
+                    position: absolute;
+                    top: -9999px;
+                    left: -9999px;
+                }
+            }
+        }
+    }
+
+    tr {
+        border: 1px solid #ccc;
+    }
+
+    td {
+        /* Behave  like a "row" */
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%;
+    }
+
+    td:before {
+        /* Now like a table header */
+        position: absolute;
+        /* Top/left values mimic padding */
+        top: 6px;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+    }
+
+
+td:nth-of-type(1):before { content: "First Name"; }
+td:nth-of-type(2):before { content: "Last Name"; }
+td:nth-of-type(3):before { content: "Email"; }
+td:nth-of-type(4):before { content: "Address"; }
+td:nth-of-type(5):before { content: "Phone number"; }
+td:nth-of-type(6):before { content: "Company"; }
+td:nth-of-type(7):before { content: "Designation"; }
+
+}
+
+
+/*@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    body {
+        padding: 0;
+        margin: 0;
+        width: 100%;
+    }
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+    body {
+        width: 495px;
+    }
+}*/
