@@ -19,7 +19,7 @@
                 @Html.ActionLink("User Details", "Index", "", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav navbar-right">
                     <li>@Html.ActionLink("Home", "Index", "")</li>
                     <li>@Html.ActionLink("About", "Index", "")</li>
                     <li>@Html.ActionLink("Contact", "Index", "")</li>
@@ -27,7 +27,7 @@
             </div>
         </div>
     </div>
-    <div class="container body-content">
+    <div class="container body-content ">
         @RenderBody()
         <hr />
         <footer>
